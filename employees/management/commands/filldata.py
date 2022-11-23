@@ -13,7 +13,8 @@ from ...models import DepartmentModel, PostModel, EmployeeModel
 class Command(BaseCommand):
     help = (
         "It fills the database with data."
-        "Creates superuser (admin/admin), department trees, posts, employees."
+        " Creates superuser (admin/admin), department trees, posts, employees."
+        " Apply only to an empty database!"
     )
     path_to_data = (Path(__file__).parent / "names").resolve()
 
@@ -23,6 +24,11 @@ class Command(BaseCommand):
         return data
 
     def add_user(self):
+        """
+        Adds a superuser with login/password `admin/admin`
+        (for django_admin).
+        """
+
         user = User(
             username="admin",
             is_staff=True,
@@ -32,20 +38,29 @@ class Command(BaseCommand):
         user.save()
 
     def add_departments(self):
+        """
+        Generates a department tree.
+        Generation is based on data from the file with names for each
+        level of the deportment. For each deportment of the current level
+        all variants of the next level are generated
+        (aaa, aab, ..., zzy, zzz).
+        """
+
         level_attrs = self._get_data_from_json("departments.json")
 
+        # empty value for generation of the first level
         tree = {"id": None, "parent_department_id": None, "children": []}
-        parents = [tree]
-        dep_id = 0
 
+        parents = [tree]
+        id_counter = 0
         for level in level_attrs.values():
             new_parents = []
 
             for parent in parents:
                 for variant in level["variants"]:
-                    dep_id += 1
+                    id_counter += 1
                     departament = {
-                        "id": dep_id,
+                        "id": id_counter,
                         "name": level["name"] + " of " + variant,
                         "parent_department_id": parent["id"],
                         "children": [],
@@ -56,10 +71,14 @@ class Command(BaseCommand):
             parents = new_parents
 
         departments = DepartmentModel.objects.build_tree_nodes(tree)
-        departments.pop(0)
+        departments.pop(0)  # removing the first empty value
         DepartmentModel.objects.bulk_create(departments)
 
     def add_posts(self):
+        """
+        Creates a list of posts from a file.
+        """
+
         post_names = self._get_data_from_json("posts.json")["names"]
         PostModel.objects.bulk_create(
             [
@@ -69,6 +88,12 @@ class Command(BaseCommand):
         )
 
     def add_employees(self):
+        """
+        For each sector (lower level of department) creates users with
+        each of the posts.
+        The name, employment date and salary are randomly generated.
+        """
+
         fios = self._get_data_from_json("employees.json")
 
         first_names, second_names, last_names = fios.values()

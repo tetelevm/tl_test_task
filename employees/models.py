@@ -16,6 +16,11 @@ _max_nesting_level = 5
 
 
 class DepartmentModel(MPTTModel):
+    """
+    Department model. A department has a name and may belong to a higher
+    level department. The maximum level of nesting of departments is 5.
+    """
+
     MAX_NESTING_LEVEL = _max_nesting_level
 
     name = TextField(
@@ -47,6 +52,10 @@ class DepartmentModel(MPTTModel):
 
 
 class PostModel(Model):
+    """
+    Model post, it contains only the title of the post.
+    """
+
     name = TextField(
         verbose_name="Post name",
         null=False,
@@ -58,6 +67,10 @@ class PostModel(Model):
 
 
 class EmployeeModel(Model):
+    """
+    An employee model that contains all the required fields.
+    """
+
     name = TextField(
         verbose_name="Full name",
         null=False,
