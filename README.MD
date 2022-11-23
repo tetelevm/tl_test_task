@@ -22,10 +22,11 @@ to be done (it is expected that Linux is used):
 ```shell
 git clone https://github.com/tetelevm/tl_test_task
 cd tl_test_task
-python 3.11 -m venv env
+python3.11 -m venv env
 . ./env/bin/activate
 pip3 install -f requirements.txt
 python3 manage.py migrate
+python3 manage.py collectstatic
 python3 manage.py filldata
 python3 manage.py runserver
 # go to 127.0.0.1:8000
