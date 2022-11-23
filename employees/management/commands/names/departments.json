@@ -1,0 +1,53 @@
+{
+    "0": {
+        "name":  "Administration",
+        "variants": [
+            "Moscow",
+            "London",
+            "Zurich",
+            "Tbilisi",
+            "Berlin"
+        ]
+    },
+    "1": {
+        "name": "Department",
+        "variants": [
+            "management",
+            "economy",
+            "propaganda",
+            "security",
+            "fiction"
+        ]
+    },
+    "2": {
+        "name": "Bureau",
+        "variants": [
+            "supervision",
+            "training",
+            "rapid response",
+            "planning",
+            "work"
+        ]
+    },
+    "3": {
+        "name": "Office",
+        "variants": [
+            "agreement",
+            "disagreement",
+            "dispute",
+            "thinking",
+            "solution"
+        ]
+    },
+    "4": {
+        "name": "Sector",
+        "variants": [
+            "development",
+            "service",
+            "bureaucracy",
+            "recruiting",
+            "dismissal",
+            "wasting paper"
+        ]
+    }
+}
