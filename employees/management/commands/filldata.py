@@ -117,7 +117,6 @@ class Command(BaseCommand):
                     post_id=post_id,
                     department_id=sector_id,
                     salary=get_salary(),
-                    is_active=True,
                 )
                 for post_id in posts
                 for sector_id in sectors

@@ -97,24 +97,10 @@ class EmployeeModel(Model):
         default=0,
         validators=[MinValueValidator(0)],
     )
-    is_active = BooleanField(
-        verbose_name="Is employee working",
-        default=True,
-    )
 
     class Meta:
         indexes = [
             Index(fields=["date_employment"]),
-            Index(fields=["is_active"]),
-        ]
-        constraints = [
-            CheckConstraint(
-                check=(
-                    (Q(is_active=True) & Q(department_id__isnull=False))
-                    | (Q(is_active=False) & Q(department_id__isnull=True))
-                ),
-                name="works_in_department"
-            ),
         ]
 
     def __str__(self):
