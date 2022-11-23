@@ -6,16 +6,16 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 
 __all__ = [
-    "Department",
-    "Post",
-    "Employee",
+    "DepartmentModel",
+    "PostModel",
+    "EmployeeModel",
 ]
 
 
 _max_nesting_level = 5
 
 
-class Department(MPTTModel):
+class DepartmentModel(MPTTModel):
     MAX_NESTING_LEVEL = _max_nesting_level
 
     name = TextField(
@@ -46,7 +46,7 @@ class Department(MPTTModel):
         return self.name
 
 
-class Post(Model):
+class PostModel(Model):
     name = TextField(
         verbose_name="Post name",
         null=False,
@@ -57,7 +57,7 @@ class Post(Model):
         return self.name
 
 
-class Employee(Model):
+class EmployeeModel(Model):
     name = TextField(
         verbose_name="Full name",
         null=False,
@@ -67,12 +67,12 @@ class Employee(Model):
         null=False,
     )
     post = ForeignKey(
-        "employees.Post",
+        "employees.PostModel",
         verbose_name="Employee post",
         on_delete=PROTECT
     )
     department = ForeignKey(
-        "employees.Department",
+        "employees.DepartmentModel",
         verbose_name="Department",
         on_delete=PROTECT,
         null=True,
@@ -104,3 +104,5 @@ class Employee(Model):
             ),
         ]
 
+    def __str__(self):
+        return self.name

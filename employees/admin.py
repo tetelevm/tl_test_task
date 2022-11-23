@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.forms import Textarea
 from django.db.models.fields import TextField
 
-from .models import Department, Post, Employee
+from .models import DepartmentModel, PostModel, EmployeeModel
 
 
 class _FlatText(admin.ModelAdmin):
@@ -11,17 +11,17 @@ class _FlatText(admin.ModelAdmin):
     }
 
 
-@admin.register(Department)
+@admin.register(DepartmentModel)
 class DepartmentAdmin(_FlatText):
     fields = (("name", "parent_department"),)
 
 
-@admin.register(Post)
+@admin.register(PostModel)
 class PostAdmin(_FlatText):
     fields = ("name",)
 
 
-@admin.register(Employee)
+@admin.register(EmployeeModel)
 class QuestionChoiceAdmin(_FlatText):
     fields = (
         ("name",),
