@@ -119,7 +119,7 @@ class Command(BaseCommand):
                     salary=get_salary(),
                 )
                 for post_id in posts
-                for sector_id in sectors
+                for sector_id in [*sectors, None]
             ]
         )
 
