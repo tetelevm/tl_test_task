@@ -1,0 +1,61 @@
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+.ibm-font {
+    font-family: "IBM Plex Mono", monospace;
+}
+
+
+/* Value nesting classes */
+
+.item-inner-text {
+    color:#000;
+    font-size: 0.9rem;
+}
+
+.item-department {
+    color: #bbbb88;
+}
+
+.item-employee {
+    color: #88bbbb;
+}
+
+.item-employee-dismiss {
+    color: #bbbbbb;
+}
+
+.nesting-0 {
+    box-shadow: 0 0 0 2px inset;
+}
+
+.nesting-1 {
+    box-shadow: 3px 1px 0 0 inset;
+    padding-left: 16px;
+}
+
+.nesting-2 {
+    box-shadow: 10px 1px 0 0 inset;
+    padding-left: 25px;
+}
+
+.nesting-3 {
+    box-shadow: 20px 1px 0 0 inset;
+    padding-left: 32px;
+}
+
+.nesting-4 {
+    box-shadow: 35px 1px 0 0 inset;
+    padding-left: 45px;
+}
+
+.nesting-5 {
+    box-shadow: 52px 1px 0 0 inset;
+    padding-left: 62px;
+}
+
+.nesting-6 {
+    box-shadow: 70px 1px 0 0 inset;
+    padding-left: 80px;
+}

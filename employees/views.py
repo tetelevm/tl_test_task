@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.db.models import F
+from django.db.models import F, Value
 
 from .models import DepartmentModel, EmployeeModel
 
@@ -33,12 +33,19 @@ def get_children(request, department_id=None):
 
     departments = DepartmentModel.objects.filter(
         parent_department_id=department_id
-    ).values("id", "name", "parent_department_id")
+    ).values("id", "name", "parent_department_id", "level")
+
     employees = EmployeeModel.objects.filter(
         department_id=department_id
     ).annotate(
-        post_name=F("post__name")
-    ).values()
+        post_name=F("post__name"),
+        level=(
+            F("department__level") + 1
+            if department_id else
+            Value(1)
+        ),
+    )
+    employees = employees.values()
 
     child_objects = {
         "departments": list(departments),
