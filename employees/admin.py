@@ -24,9 +24,6 @@ class PostAdmin(_FlatText):
 @admin.register(EmployeeModel)
 class QuestionChoiceAdmin(_FlatText):
     fields = (
-        ("name",),
-        ("date_employment", "is_active"),
+        ("name", "date_employment"),
         ("department", "post", "salary"),
     )
-
-
