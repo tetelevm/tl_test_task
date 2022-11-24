@@ -24,7 +24,7 @@ git clone https://github.com/tetelevm/tl_test_task
 cd tl_test_task
 python3.11 -m venv env
 . ./env/bin/activate
-pip3 install -f requirements.txt
+pip3 install -r requirements.txt
 python3 manage.py migrate
 python3 manage.py collectstatic
 python3 manage.py filldata
